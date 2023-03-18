@@ -6,24 +6,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 @Preview
 fun App() {
 
-    var board by remember { mutableStateOf("0") }
+    var board by remember { mutableStateOf("") }
     val space = 5.dp
     val operationColor = Color.Gray
 
@@ -32,38 +25,52 @@ fun App() {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Column {
+            Column (
+                modifier = Modifier.background(Color.DarkGray, shape = RoundedCornerShape(10.dp)).padding(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
 
-                Text(
-                    board,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.End,
-                )
+                Box{
+                    OutlinedTextField (
+                        value = board,
+                        onValueChange = {},
+                        placeholder = { Text("0", color = Color.Gray) },
+                        modifier = Modifier.background(color = Color.LightGray, shape = RoundedCornerShape(space))
+                    )
+
+
+                }
 
                 Spacer(Modifier.height(space))
 
                 Row {
                     Button(onClick = {
-                               board = "1"
+                               board += "1"
                     },){
                         Text("1")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "2"
+                    },){
                         Text("2")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "3"
+                    }){
                         Text("3")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                        board += "/"
+                    },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = operationColor,
                             contentColor = Color.White)){
@@ -72,25 +79,33 @@ fun App() {
                 }
 
                 Row {
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "4"
+                    }){
                         Text("4")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "5"
+                    }){
                         Text("5")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "6"
+                    }){
                         Text("6")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                        board += "*"
+                    },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = operationColor,
                             contentColor = Color.White)){
@@ -99,25 +114,33 @@ fun App() {
                 }
 
                 Row {
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "7"
+                    }){
                         Text("7")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "8"
+                    }){
                         Text("8")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},){
+                    Button(onClick = {
+                        board += "9"
+                    }){
                         Text("9")
                     }
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                        board += "+"
+                    },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = operationColor,
                             contentColor = Color.White)){
@@ -127,7 +150,9 @@ fun App() {
 
                 Row {
                     Button(
-                        onClick = {},
+                        onClick = {
+                            board += "."
+                        },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color.Gray,
                             contentColor = Color.White)){
@@ -136,7 +161,9 @@ fun App() {
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                        board += "0"
+                    },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color.Gray,
                             contentColor = Color.White)){
@@ -145,7 +172,9 @@ fun App() {
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                              board = DoubleCalculator.evaluate(board).toString()
+                    },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color.Gray,
                             contentColor = Color.White)){
@@ -154,7 +183,9 @@ fun App() {
 
                     Spacer(Modifier.width(space))
 
-                    Button(onClick = {},
+                    Button(onClick = {
+                        board += "-"
+                    },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = operationColor,
                             contentColor = Color.White)){
