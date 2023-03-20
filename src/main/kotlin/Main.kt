@@ -1,5 +1,6 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,7 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
@@ -30,40 +34,73 @@ fun App() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
 
-                Box{
-                    OutlinedTextField (
-                        value = board,
-                        onValueChange = {},
-                        placeholder = { Text("0", color = Color.Gray) },
-                        modifier = Modifier.background(color = Color.LightGray, shape = RoundedCornerShape(space))
-                    )
+                OutlinedTextField(
+                    value = board,
+                    onValueChange = {},
+                    textStyle = TextStyle.Default.copy(fontSize = 20.sp),
+                    placeholder = { Text("0", color = Color.Gray, fontSize = 20.sp) },
+                    modifier = Modifier.background(color = Color.LightGray, shape = RoundedCornerShape(space))
+                )
 
-
-                }
 
                 Spacer(Modifier.height(space))
 
                 Row {
                     Button(onClick = {
-                               board += "1"
+                        board += "("
                     },){
-                        Text("1")
+                        Text("(")
                     }
 
                     Spacer(Modifier.width(space))
 
                     Button(onClick = {
-                        board += "2"
+                        board += ")"
                     },){
-                        Text("2")
+                        Text(")")
                     }
 
                     Spacer(Modifier.width(space))
 
                     Button(onClick = {
-                        board += "3"
+                        board = ""
                     }){
-                        Text("3")
+                        Text("C")
+                    }
+
+                    Spacer(Modifier.width(space))
+
+                    Button(onClick = {
+                        board = board.dropLast(1)
+                    },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color.Red,
+                            contentColor = Color.White)){
+                        Text("Del")
+                    }
+                }
+
+                Row {
+                    Button(onClick = {
+                        board += "7"
+                    }){
+                        Text("7")
+                    }
+
+                    Spacer(Modifier.width(space))
+
+                    Button(onClick = {
+                        board += "8"
+                    }){
+                        Text("8")
+                    }
+
+                    Spacer(Modifier.width(space))
+
+                    Button(onClick = {
+                        board += "9"
+                    }){
+                        Text("9")
                     }
 
                     Spacer(Modifier.width(space))
@@ -114,26 +151,27 @@ fun App() {
                 }
 
                 Row {
+
                     Button(onClick = {
-                        board += "7"
-                    }){
-                        Text("7")
+                        board += "1"
+                    },){
+                        Text("1")
                     }
 
                     Spacer(Modifier.width(space))
 
                     Button(onClick = {
-                        board += "8"
-                    }){
-                        Text("8")
+                        board += "2"
+                    },){
+                        Text("2")
                     }
 
                     Spacer(Modifier.width(space))
 
                     Button(onClick = {
-                        board += "9"
+                        board += "3"
                     }){
-                        Text("9")
+                        Text("3")
                     }
 
                     Spacer(Modifier.width(space))
