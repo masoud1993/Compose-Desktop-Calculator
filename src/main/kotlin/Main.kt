@@ -13,9 +13,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 @Preview
 fun App() {
@@ -23,6 +25,7 @@ fun App() {
     var board by remember { mutableStateOf("") }
     val space = 5.dp
     val operationColor = Color.Gray
+
 
     MaterialTheme {
         Box(
@@ -211,7 +214,9 @@ fun App() {
                     Spacer(Modifier.width(space))
 
                     Button(onClick = {
-                              board = DoubleCalculator.evaluate(board).toString()
+                        try {
+                            board = DoubleCalculator.evaluate(board).toString()
+                        }catch (e : UnsupportedOperationException){ }
                     },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color.Gray,

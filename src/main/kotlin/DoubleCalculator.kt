@@ -73,9 +73,9 @@ object DoubleCalculator {
             while (!ops.empty()) values.push(applyOp(ops.pop(), values.pop(), values.pop()))
 
             // Top of 'values' contains result, return it
-            if (values.size > 0) values.pop() else throw UnsupportedOperationException("عبارت ریاضی نامعتبر!")
+            if (values.size > 0) values.pop() else throw UnsupportedOperationException("Invalid input!")
         } catch (e: Exception) {
-            throw UnsupportedOperationException("عبارت ریاضی نامعتبر!")
+            throw UnsupportedOperationException("Invalid input!")
         }
     }
 
@@ -90,7 +90,7 @@ object DoubleCalculator {
             '-' -> return a - b
             '*' -> return a * b
             '/' -> {
-                if (b == 0.0) throw UnsupportedOperationException("خطای تقسیم بر صفر!")
+                if (b == 0.0) throw UnsupportedOperationException("Divide by zero!")
                 return a / b
             }
         }
